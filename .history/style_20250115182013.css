@@ -1,0 +1,571 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #181818;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+header {
+  background-color: #00047a;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  height: 65px;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 15px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
+  width: 100%;
+}
+
+#game-area {
+  text-align: center;
+}
+
+#count {
+  font-size: 4rem;
+  margin-bottom: 10px;
+  color: #e0e0e0;
+  transition: transform 0.3s ease;
+}
+
+#goldTimer {
+  margin-bottom:10px;
+  margin-top: 10px;
+}
+
+#count.insufficient {
+  animation: flashRed 0.3s ease;
+}
+
+#count.gold {
+  color: gold;
+}
+
+@keyframes flashRed {
+  0%,
+  100% {
+    color: #e0e0e0;
+    transform: scale(1);
+  }
+  50% {
+    color: red;
+    transform: scale(1.2);
+  }
+}
+
+#clicker {
+  width: 200px;
+  height: 70px;
+  font-size: 1.5rem;
+  color: white;
+  background-color: #00047a;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#clicker:active {
+  opacity: 0.8;
+}
+
+#info {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+#shop::-webkit-scrollbar {
+  display: none;
+}
+
+#shop {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: #282828;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  overflow: scroll;
+}
+
+#shop h2 {
+  margin-bottom: 15px;
+}
+
+#shop .upgrade {
+  display: block;
+  width: 100%;
+  height: 75px;
+  overflow-y: hidden;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1.2rem;
+  color: black;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: scale 0.01s ease;
+}
+
+#shop .upgrade:hover {
+  outline: 2px solid white;
+}
+
+#shop .upgrade:active {
+  scale: 1.01;
+}
+
+#shop .upgrade.disabled {
+  opacity: 0.2;
+}
+
+#shop-navigation button {
+  font-size: 1rem;
+  background-color: #00047a;
+  color: white;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#shop-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+#shop-navigation button:hover {
+  opacity: 0.8;
+  outline: 2px solid white;
+}
+
+#close-shop {
+  display: block;
+  width: 100%;
+  height: 75px;
+  overflow-y: hidden;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #4f4f4f;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+#close-shop:hover {
+  opacity: 0.85;
+}
+
+#shop.visible {
+  transform: translateX(300px);
+}
+
+#settings.visible #code {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+#settings {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  background-color: #282828;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+#settings.visible {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+#settings.visible h2 {
+  margin-bottom: 15px;
+}
+
+#settings.visible label {
+  font-size: 1.5rem;
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 11px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+#settings.visible button{
+  display: block;
+  width: 100%;
+  height: 75px;
+  overflow-y: hidden;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: navy;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#settings.visible #info-button {
+  margin-top: 10px;
+}
+
+#leaderboard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+#settings.visible #toggles {
+  list-style-type: none;
+  display: flex;
+}
+
+#settings.visible input {
+  margin-top: 15px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#settings.visible label {
+  font-size: 1.5rem;
+}
+
+#close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#toggleButtons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#toggleButtons button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#toggleButtons button:hover {
+  background-color: #555;
+}
+
+#auto-power.active {
+  animation: flashGreen 0.25s linear;
+}
+
+@keyframes flashGreen {
+  0%,
+  100% {
+    color: #333;
+  }
+  50% {
+    color: green;
+  }
+}
+
+#infoBox {
+  position: fixed;
+  top: 70px;
+  right: -200px;
+  background-color: #fff;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 1s ease, right 0.5s ease;
+}
+
+#infoBox.visible {
+  opacity: 1;
+  right: 10px;
+}
+
+#bid {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  background-color: #e8e8e8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+#bid.visible {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+#bid h2 {
+  margin-bottom: 15px;
+  color: black;
+}
+
+#bid button {
+  display: block;
+  width: 100%;
+  height: 75px;
+  overflow-y: hidden;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #666666;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#bid ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 10px;
+  width: 100%;
+  overflow-y: scroll;
+  white-space: normal;
+}
+
+#bid ul li {
+  font-size: 1.2rem;
+  display: inline-block;
+  background-color: #f0f0f0;
+  color: black;
+  padding: 10px 20px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+#bid ul::-webkit-scrollbar {
+  display: none;
+}
+
+#bid ul::-webkit-scrollbar-track {
+  display: none;
+}
+
+#bid ul::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+#bid #bidAmount {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+#bid .bid-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bidding-container {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+#bid #bidInfo {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+#bid #countdown {
+  margin-bottom: 10px;
+  color: black;
+}
+
+#bid #close-bidding {
+  background-color: #4a4a4a;
+}
+
+#bid #bidAmount {
+  margin-bottom: 10px;
+}
+
+#infoZone {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: black;
+  padding: 20px;
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#infoZone::-webkit-scrollbar {
+  display: none;
+}
+
+#infoZone.visible {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+#infoZone h2 {
+  margin-bottom: 15px;
+}
+
+#infoZone button {
+  display: block;
+  width: 100%;
+  height: 75px;
+  overflow-y: hidden;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: navy;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#infoZone label {
+  font-size: 1.5rem;
+  color: black;
+}
+
+#progressList {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#statList {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px #00047a, 0 0 20px #00047a;
+  }
+  50% {
+    box-shadow: 0 0 20px #00047a, 0 0 40px #00047a;
+  }
+  100% {
+    box-shadow: 0 0 10px #00047a, 0 0 20px #00047a;
+  }
+}
+
+#clicker {
+  animation: glow 1s infinite;
+}
+
+#settings.visible,
+#bid.visible,
+#infoZone.visible,
+#leaderboard.visible {
+  animation: zoomIn 0.5s ease-in-out;
+}
+@keyframes zoomIn {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
