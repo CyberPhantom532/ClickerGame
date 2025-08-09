@@ -1,0 +1,11 @@
+{
+    "clicker": {
+        "highscore": 99999999999,
+        "player": "hello"
+    },
+    "general": {
+        "data": {
+            "people_online": 0
+        }
+    }
+}

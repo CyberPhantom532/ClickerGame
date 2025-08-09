@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section 1 - Section - TeachTCI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1 id="title">C</h1>
+  </header>
+
+  <p id="username">Username: </p>
+
+  <div id="server-data-div">
+    <div id="online-people-div">
+      <img src="/images/people.png" alt="Image">
+      <p id="online-people"></p>
+    </div>
+    <div id="highscore-div">
+      <img src="/images/highscore.png" alt="Image">
+      <p id="high-score"></p>
+    </div>
+  </div>
+
+  <main>
+    <div id="game-area">
+      <p id="count">0</p>
+      <p id="goldTimer"></p>
+      <button id="clicker" onclick="onClick()">Click Me!</button>
+
+      <div id="gameInfo">
+        <p id="click-power">Click Power: 1</p>
+        <p id="auto-power">Auto Click: 0</p>
+        <p id="auto-delay">Auto Click Delay: 5,000ms</p>
+        <p id="critical-percent">Critical Percent: 0.1%</p>
+        <p id="gold-rush-multiplier">Gold Rush Time: 1.00x</p>
+      </div>
+    </div>
+
+    <div id="shop">
+      <h2>Shop</h2>
+      <div id="shop-navigation">
+        <button onclick="scrollToCategory('autoPowerHeader')" style="background: url('/images/auto.png') no-repeat center center; background-size: contain; width: 40px; height: 40px; border: none;"></button>
+        <button onclick="scrollToCategory('autoDelayHeader')" style="background: url('/images/delay.png') no-repeat center center; background-size: contain; width: 40px; height: 40px; border: none;"></button>
+        <button onclick="scrollToCategory('clickPowerHeader')" style="background: url('/images/upgrade.png') no-repeat center center; background-size: contain; width: 40px; height: 40px; border: none;"></button>
+        <button onclick="scrollToCategory('goldRushHeader')" style="background: url('/images/gold.png') no-repeat center center; background-size: contain; width: 40px; height: 40px; border: none;"></button>
+      </div>
+      <!-- Click Power -->
+      <div id="clickPowerUpgrades">
+        <button class="upgrade clickPowerUpgrade" id="Click Power_1" onclick="upgradeClick('Click Power_1')"></button>
+        <button class="upgrade clickPowerUpgrade" id="Click Power_5" onclick="upgradeClick('Click Power_5')"></button>
+        <button class="upgrade clickPowerUpgrade" id="Click Power_20" onclick="upgradeClick('Click Power_20')"></button>
+        <button class="upgrade clickPowerUpgrade" id="Click Power_100"
+          onclick="upgradeClick('Click Power_100')"></button>
+        <button class="upgrade clickPowerUpgrade" id="Click Power_500"
+          onclick="upgradeClick('Click Power_500')"></button>
+        <button class="upgrade clickPowerUpgrade" id="Click Power_1000"
+          onclick="upgradeClick('Click Power_1000')"></button>
+        <button class="upgrade clickPowerUpgrade" id="Click Power_5000"
+          onclick="upgradeClick('Click Power_5000')"></button>
+        <button class="upgrade clickPowerUpgrade" id="Click Power_10000"
+          onclick="upgradeClick('Click Power_10000')"></button>
+      </div>
+
+      <!-- Auto Click Power -->
+      <div id="autoPowerUpgrades">
+        <button class="upgrade autoPowerUpgrade" id="Auto Click_1" onclick="upgradeAuto('Auto Click_1')"></button>
+        <button class="upgrade autoPowerUpgrade" id="Auto Click_5" onclick="upgradeAuto('Auto Click_5')"></button>
+        <button class="upgrade autoPowerUpgrade" id="Auto Click_20" onclick="upgradeAuto('Auto Click_20')"></button>
+        <button class="upgrade autoPowerUpgrade" id="Auto Click_100" onclick="upgradeAuto('Auto Click_100')"></button>
+        <button class="upgrade autoPowerUpgrade" id="Auto Click_500" onclick="upgradeAuto('Auto Click_500')"></button>
+        <button class="upgrade autoPowerUpgrade" id="Auto Click_1000" onclick="upgradeAuto('Auto Click_1000')"></button>
+        <button class="upgrade autoPowerUpgrade" id="Auto Click_5000" onclick="upgradeAuto('Auto Click_5000')"></button>
+        <button class="upgrade autoPowerUpgrade" id="Auto Click_10000" onclick="upgradeAuto('Auto Click_10000')">
+
+        </button>
+
+      </div>
+
+      <!-- Auto Click Delay -->
+      <div id="autoDelayUpgrades">
+        <button class="upgrade autoDelayUpgrade" id="Auto Delay_0.9"
+          onclick="upgradeAutoDelay('Auto Delay_0.9')"></button>
+        <button class="upgrade autoDelayUpgrade" id="Auto Delay_0.8"
+          onclick="upgradeAutoDelay('Auto Delay_0.8')"></button>
+        <button class="upgrade autoDelayUpgrade" id="Auto Delay_0.6"
+          onclick="upgradeAutoDelay('Auto Delay_0.6')"></button>
+        <button class="upgrade autoDelayUpgrade" id="Auto Delay_0.5"
+          onclick="upgradeAutoDelay('Auto Delay_0.5')"></button>
+      </div>
+
+      <!-- Gold Rush Time -->
+      <div id="goldRushUpgrades">
+        <button class="upgrade goldRushUpgrade" id="Gold Rush Time_1.25"
+          onclick="upgradeGoldRushTime('Gold Rush Time_1.25')"></button>
+        <button class="upgrade goldRushUpgrade" id="Gold Rush Time_2"
+          onclick="upgradeGoldRushTime('Gold Rush Time_2')"></button>
+      </div>
+
+      <!-- Critical Click -->
+      <div id="criticalClicksUpgrades">
+        <button class="upgrade criticalClickUpgrade" id="Critical Click_0.001"
+          onclick="upgradeCriticalClick('Critical Click_0.001')"></button>
+        <button class="upgrade criticalClickUpgrade" id="Critical Click_0.005"
+          onclick="upgradeCriticalClick('Critical Click_0.005')"></button>
+      </div>
+
+      <button id="close-shop" onclick="toggleShop()">Close</button>
+    </div>
+
+    <div id="settings">
+      <h2>Settings</h2>
+      <button id="close-settings" onclick="toggleSettings()">Close</button>
+      <button id="reset" onclick="resetGame()">Reset Game</button>
+      <ul id="toggles">
+        <li><input type="checkbox" id="easyMode" onclick="toggleEasyMode()"></li>
+        <label for="easyMode">Easy Mode</label>
+        <li><input type="checkbox" id="shorten" onclick="toggleShorten()"></li>
+        <label for="shorten">Abbreviate money</label>
+        <li><input type="checkbox" id="upgrade-count" onclick="toggleUpgradeCount()"></li>
+        <label for="upgrade-count">Upgrade count</label>
+      </ul>
+
+      <input type="range" min="0" max="100" value="1" class="slider" id="particleCountSlider">
+      <span id="particleCount">Particles: 1</span>
+
+      <input type="text" id="player-name-input" placeholder="Enter your username: " onkeyup="if (event.key === 'Enter') {nameSubmission()}"/>
+      <input type="text" id="code" placeholder="Type you cheat code here: " onkeyup="if (event.key === 'Enter') {codeSubmission()}">
+      <ul id="cheatCodeList"></ul>
+    </div>
+
+    <div id="bid">
+      <h2>Bidding</h2>
+      <div class="bid-content">
+        <button id="close-bidding" onclick="toggleBidding()">Close</button>
+        <button id="bidSubmit" onclick="bidSubmission()"
+          onkeydown="if (event.key === 'enter') {bidSubmission()}">Submit: </button>
+        <p id="countdown">Time Left: 0s</p>
+        <p id="bidInfo" style="color:green">Pot: 0, Chance: 100% Bid: 0</p>
+        <input type="text" id="bidAmount" placeholder="Enter bid amount:"
+          onkeydown="if (event.key === 'Enter') {bidSubmission()}">
+        <ul id="bids"></ul>
+      </div>
+    </div>
+  </main>
+
+  <div id="toggleButtons">
+    <button id="toggle-shop" onclick="toggleShop()">Open Shop</button>
+    <button id="settings-toggle" onclick="toggleSettings()">Open Settings</button>
+    <button id="bid-toggle" onclick="toggleBidding()">Open Bidding</button>
+    <button id="info-button" onclick="toggleInfoBoxes()">Info and Stats</button>
+    <button id="log-button" onclick="toggleLog()">Open Logs</button>
+    <!-- <button id="local-button" onclick="loadGameData()">Load Game Data</button> -->
+    <button id="terminal-button" onclick="toggleTerminal()">Terminal</button>
+  </div>
+
+  <div id="terminal">
+    <div id="terminal-output"></div>
+    <div id="terminal-input-line">
+      <span class="prompt">></span>
+      <input type="text" id="terminal-input" onkeydown="if(event.key==='Enter')processCommand(this.value)" autocomplete="off">
+    </div>
+  </div>
+
+  <div id="infoZone">
+    <h3>Information</h3>
+    <hr>
+    <h3>Stats</h3>
+    <ul id="statList">
+      <li id="timePlayed">Time played: 0m 0s</li>
+      <li id="totalClicks">Clicks: 0</li>
+      <li id="goldenCountdown">Gold Rush Countdown: 0m 0s</li>
+      <li id="moneyFromGolden">Money from gold rush: $0</li>
+      <li id="wonBids">Bids won: 0</li>
+      <li id="lostBids">Bids lost: 0</li>
+      <li id="totalBids">Total bids: 0</li>
+    </ul>
+    <hr>
+    <h3>Progress</h3>
+    <ul id="progressList">
+      <li>Added this info thing.</li>
+      <li>Made an easy mode and hard mode. In hard mode after you buy something the price will increase by 50 percent.
+      </li>
+      <li>Added shop navigation buttons.</li>
+      <li>Added stats (below).</li>
+      <li>Added major update on the colors and styling of the game.</li>
+      <li>Dark mode was removed, becuase it was to difficult to maintain.</li>
+      <li>Updated bidding name list. Names are AI generated.</li>
+      <li>Readded locally stored game data.</li>
+      <li>For anyone looking at the code, I know, its bad and old.</li>
+      <li>Moved the info and stats button.</li>
+      <li>Added golden countdown so you know how much time is left</li>
+      <li>Fixed gold rush countdown in info and stats.</li>
+      <li>Fixed load game glitch with checkboxes.</li>
+      <li>Format all numbers even upgrade numbers and info numbers.</li>
+      <li>Added critical click which is 5 percent and if you get it you get a random update, which normal upgrade rules
+        won't apply.</li>
+      <li>More upgrades.</li>
+    </ul>
+    <button id="close-info-boxes" onclick="toggleInfoBoxes()">Close</button>
+  </div>
+
+  <div id="logs">
+    <button id="close-logs" class="close-button" onclick="toggleLog()">X</button>
+    <h3>Logs</h3>
+    <hr>
+    <ol id="logList">
+    </ol>
+  </div>
+
+  <div id="info-container">
+    <div id="infoBox"></div>
+    <span id="notifications">0</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
